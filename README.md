@@ -14,6 +14,9 @@ at 650-738-7460.
 
 - The weekly schedule image is replaced by an embedded Pool Relay calendar, which updates itself
   as the pool's schedule changes.
+- The typed-out swim hours and the full-day and part-day closure lists are gone. The calendar
+  already shows both: closed days appear empty, and part-day changes appear as the event that
+  replaces the usual session.
 - The city seal in the header is a CSS placeholder rather than the city's mark.
 - Navigation links are inert placeholders.
 
