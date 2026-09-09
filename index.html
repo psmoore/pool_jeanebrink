@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!--
+  Unofficial replica of the City of Pacifica Aquatics page
+  Source: https://www.cityofpacifica.org/departments/parks-beaches-recreation/aquatics
+  The weekly schedule image on the city page is replaced here by the live Pool Relay calendar.
+  Not an official City of Pacifica website.
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Aquatics | City of Pacifica</title>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#05273c;
+    --blue:#17608e;
+    --blue-light:#1b6ca8;
+    --ink:#555;
+    --rule:#e0e0e0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55;color:var(--ink);background:#fff}
+  a{color:var(--blue-light)}
+
+  /* ---------- header ---------- */
+  .utility{max-width:1280px;margin:0 auto;padding:14px 20px;display:flex;align-items:center;gap:24px}
+  .seal{width:86px;height:86px;border-radius:50%;background:linear-gradient(#bfe3f5 0 55%,#e8dcc0 55% 100%);
+        border:3px solid #fff;box-shadow:0 0 0 1px #cfd8dd;display:flex;align-items:center;justify-content:center;
+        font-size:9px;font-weight:700;color:var(--navy);text-align:center;letter-spacing:.04em;text-transform:uppercase;flex:none}
+  .utility .spacer{flex:1}
+  .utility-right{text-align:right}
+  .utility-links{display:flex;gap:26px;justify-content:flex-end;font-size:14px;margin-bottom:12px}
+  .utility-links a{color:#333;text-decoration:none}
+  .utility-links a:hover{text-decoration:underline}
+  .btn-finder{display:inline-block;background:#1268a8;color:#fff;font-weight:700;font-size:15px;letter-spacing:.05em;
+              padding:13px 30px;border-radius:26px;text-decoration:none}
+
+  /* ---------- main nav ---------- */
+  .mainnav{background:var(--navy)}
+  .mainnav ul{max-width:1280px;margin:0 auto;padding:0 20px;list-style:none;display:flex;align-items:stretch}
+  .mainnav a{display:block;padding:16px 26px;color:#fff;font-size:19px;font-weight:600;text-decoration:none;letter-spacing:.02em}
+  .mainnav a:hover,.mainnav .active a{background:var(--blue)}
+  .mainnav .search{margin-left:auto;display:flex;align-items:center;padding:0 26px;color:#fff;font-size:19px}
+
+  /* ---------- layout ---------- */
+  .band{background:var(--blue)}
+  .layout{max-width:1280px;margin:0 auto;display:flex;align-items:stretch;background:#fff}
+  .sidebar{width:300px;flex:none;background:var(--blue);color:#fff;padding:18px 0 40px}
+  .content{flex:1;background:#fff;padding:28px 40px 60px;min-width:0}
+
+  /* ---------- sidebar nav ---------- */
+  .subnav{list-style:none;margin:0;padding:0;font-size:14px}
+  .subnav a{display:block;color:#bac7cf;text-decoration:none;padding:9px 18px 9px 34px}
+  .subnav a:hover{color:#fff}
+  .subnav .top>a{color:#fff;font-weight:700;text-transform:uppercase;letter-spacing:.03em;padding-left:22px}
+  .subnav .current>a{background:var(--navy);color:#fff;font-weight:500}
+  .subnav .child a{padding-left:56px}
+  .subnav .toggle{display:inline-block;width:14px;margin-left:-16px;color:#9fb6c4}
+
+  .contact-card{margin:26px 14px 0;background:#fff;border:1px solid #cfd8dd}
+  .contact-card h2{margin:0;background:var(--navy);color:#fff;font-size:16px;font-weight:600;padding:10px 14px}
+  .contact-card .body{padding:14px;font-size:13.5px;color:#333;line-height:1.5}
+  .contact-card strong{display:block;color:#05273c}
+  .contact-card .group{margin-top:12px}
+
+  /* ---------- content ---------- */
+  .crumbs{font-size:14px;margin-bottom:6px}
+  .crumbs a{color:var(--blue-light)}
+  h1{font-family:Roboto;font-size:40px;font-weight:700;color:var(--navy);margin:.2em 0 .4em}
+  .pagetools{display:flex;justify-content:flex-end;align-items:center;gap:22px;font-size:14px;margin-bottom:26px}
+  .pagetools a{text-decoration:underline}
+  .pagetools .fs{color:#333}
+  .pagetools .fsbtn{display:inline-block;width:20px;height:20px;line-height:18px;text-align:center;background:#1268a8;color:#fff;
+                    border-radius:3px;text-decoration:none;font-weight:700;margin-left:4px}
+  h2{font-size:31px;font-weight:700;color:var(--navy);margin:1.4em 0 .5em;line-height:1.2}
+  h3{font-size:23px;font-weight:700;color:var(--navy);margin:1.3em 0 .4em}
+  .lede{font-size:34px;font-weight:700;color:var(--navy);margin:0 0 .5em}
+  p{margin:.55em 0}
+  .content ul{margin:.6em 0;padding-left:22px}
+  .content li{margin:.3em 0}
+  .note{font-weight:700;color:#333}
+
+  /* calendar embed */
+  .calendar-embed{margin:34px 0 40px}
+  .calendar-embed iframe{display:block;width:100%;border:0}
+
+  table{border-collapse:collapse;width:100%;max-width:760px;margin:14px 0 8px;font-size:15px}
+  th{background:var(--navy);color:#fff;text-align:left;font-weight:600;padding:6px 9px}
+  td{padding:6px 9px;border-bottom:1px solid var(--rule);color:#333}
+  tbody tr:nth-child(even) td{background:#f5f7f8}
+  td.price{width:150px}
+
+  .figure-right{float:right;margin:6px 0 14px 26px;max-width:270px}
+  .figure-right img{width:100%;display:block}
+  .clear{clear:both}
+  .callout{border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:16px 0;margin:30px 0}
+
+  /* ---------- footer ---------- */
+  footer{background:var(--navy);color:#bdbdbd;font-size:14px}
+  .footer-inner{max-width:1280px;margin:0 auto;padding:24px 20px 34px}
+  .footer-nav{display:flex;justify-content:center;gap:44px;margin-bottom:20px}
+  .footer-nav a{color:#fff;text-decoration:none;font-size:14px;letter-spacing:.04em}
+  .footer-bottom{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+  .footer-bottom strong{color:#fff}
+  .btn-subscribe{background:#1268a8;color:#fff;font-weight:700;letter-spacing:.06em;padding:11px 26px;border-radius:22px;text-decoration:none;font-size:14px}
+  .social{display:flex;gap:10px;margin-top:10px}
+  .social span{width:26px;height:26px;border-radius:50%;background:#0d3c58;display:inline-block}
+
+  @media (max-width:980px){
+    .layout{flex-direction:column}
+    .sidebar{width:100%}
+    .content{padding:24px 20px 44px}
+    .mainnav ul{flex-wrap:wrap}
+    .figure-right{float:none;margin:14px 0;max-width:100%}
+    h1{font-size:32px}
+    h2{font-size:26px}
+  }
+</style>
+</head>
+<body>
+
+<div class="utility">
+  <div class="seal">City of<br>Pacifica</div>
+  <div class="spacer"></div>
+  <div class="utility-right">
+    <div class="utility-links">
+      <a href="#">FAQs</a>
+      <a href="#">Jobs</a>
+      <a href="#">Contact Us</a>
+    </div>
+    <a class="btn-finder" href="#">SERVICE FINDER</a>
+  </div>
+</div>
+
+<nav class="mainnav">
+  <ul>
+    <li><a href="#">I WANT TO</a></li>
+    <li class="active"><a href="#">DEPARTMENTS</a></li>
+    <li><a href="#">GOVERNMENT</a></li>
+    <li><a href="#">BUSINESS</a></li>
+    <li><a href="#">ABOUT US</a></li>
+    <li class="search">&#9906;</li>
+  </ul>
+</nav>
+
+<div class="band">
+<div class="layout">
+
+  <aside class="sidebar">
+    <ul class="subnav">
+      <li class="top"><a href="#"><span class="toggle">&minus;</span>Parks, Beaches &amp; Recreation</a></li>
+      <li class="current"><a href="#"><span class="toggle">&minus;</span>Aquatics</a></li>
+      <li class="child"><a href="#">Pool Rules and Policies</a></li>
+      <li class="child"><a href="#">American Red Cross Certification</a></li>
+      <li class="child"><a href="#">Wet and Wild Water Camp</a></li>
+      <li class="child"><a href="#">Swim Lessons Class Descriptions</a></li>
+      <li class="child"><a href="#">Water Polo &amp; Swim Team</a></li>
+      <li class="child"><a href="#">Pool Parties</a></li>
+      <li><a href="#"><span class="toggle">+</span>Child Care Services</a></li>
+      <li><a href="#"><span class="toggle">+</span>Recreation Services</a></li>
+      <li><a href="#"><span class="toggle">+</span>Senior Services</a></li>
+      <li><a href="#"><span class="toggle">+</span>Parks and Beaches Locations, Maps &amp; Safety Guides</a></li>
+      <li><a href="#"><span class="toggle">+</span>Parks, Beaches, Trail Event Permits &amp; Facility Reservations</a></li>
+      <li><a href="#"><span class="toggle">+</span>Beach Parking Passes, Fees &amp; Locations</a></li>
+      <li><a href="#">Parks, Beaches, Recreation Commission</a></li>
+      <li><a href="#">Surf Camps</a></li>
+    </ul>
+
+    <div class="contact-card">
+      <h2>Contact</h2>
+      <div class="body">
+        <strong>Jean E. Brink Pool</strong>
+        at Oceana High School<br>
+        401 Paloma Avenue<br>
+        Pacifica, CA 94044
+        <div class="group">
+          <strong>Pool Front Desk</strong>
+          650-738-7460
+        </div>
+        <div class="group">
+          <strong>Mitchell Klassen</strong>
+          Recreation Coordinator, Aquatics<br>
+          <a href="mailto:mklassen@pacifica.gov">Email</a>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <div class="crumbs"><a href="#">Departments</a> &raquo; <a href="#">Parks, Beaches &amp; Recreation</a> &raquo;</div>
+    <h1>Aquatics</h1>
+
+    <div class="pagetools">
+      <a href="#">Print</a>
+      <a href="#">Feedback</a>
+      <a href="#">Share &amp; Bookmark</a>
+      <span class="fs">Font Size: <a class="fsbtn" href="#">+</a> <a class="fsbtn" href="#">&minus;</a></span>
+    </div>
+
+    <p class="lede">&nbsp;Jean E. Brink Pool is Open</p>
+
+    <p><strong>Location: 401 Paloma Ave. Pacifica, CA 94044 (Oceana High School Campus)</strong><br>
+       <strong>Phone: (650)738-7460</strong></p>
+
+    <h3>Lap Swim/Water Aerobics/ Family Recreation Swim</h3>
+    <p class="note">Jean E. Brink Pool schedule is as follows (Schedule is subject to change and please check closure dates.):</p>
+
+    <h2>Adult Lap Swim:</h2>
+    <p>Monday - Friday: 6:00am - 9:00am</p>
+    <p>Monday - Friday: 11:00am - 1:00pm</p>
+    <p>Wednesday: 7:00pm - 9:00pm* (year around)</p>
+    <p>Saturday: 8:00am - 12:30pm (year around)</p>
+    <p>Sunday: 11am - 1:00pm (year around)</p>
+
+    <h2>Adult Water Aerobics Schedule:</h2>
+    <p>Monday - Friday 11:30 am - 12:30pm</p>
+
+    <h2>Family Recreation Swim:</h2>
+    <p>Year-round Friday Evenings: 7:00pm - 9:00pm**</p>
+
+    <p>*3 Lanes available for Adult Lap Swim</p>
+    <p>*Please note on Wednesday nights Lap Swim will be limited to lanes 5-10 as Artistic Swimming is practicing in lanes 1-4</p>
+    <ul>
+      <li>Please respect lap swim etiquette, and code of conduct at all times.</li>
+      <li>A walkway ramp is available in lap lane 10.</li>
+    </ul>
+    <p class="note">*Schedule is subject to event, emergency, and other necessary closures and changes.</p>
+
+    <!-- Weekly schedule: Pool Relay live calendar (replaces the weekly schedule image used on the city page) -->
+    <div class="calendar-embed">
+      <iframe src="https://www.poolrelay.com/embed/bkGoEhEvUB0l165FNcu5ga" width="100%" height="640" frameborder="0" style="border:0" title="Pool Relay calendar"></iframe>
+    </div>
+
+    <h2>Upcoming Pool Closure Date:</h2>
+    <p class="note">Full Day Closures</p>
+    <p>Monday Sept 7, 2026- Labor Day</p>
+    <p>Saturday Sept 19, 2026 - Swim Meet</p>
+    <p>Sunday Sept 20, 2026 - Swim Meet</p>
+    <p>Saturday Oct 24, 2026 - Swim Meet</p>
+    <p>Sunday Oct 25, 2026 - Swim Meet</p>
+    <p>Wednesday Nov 11, 2026 - Veterans Day</p>
+    <p>Saturday Nov 14, 2026 - Swim Meet</p>
+    <p>Sunday Nov 15, 2026 - Swim Meet</p>
+    <p>Thursday Nov 26, 2026 - Thanksgiving</p>
+    <p>Saturday Dec 5, 2026 - Swim Meet</p>
+    <p>Sunday Dec 6, 2026 - Swim Meet</p>
+    <p>Saturday Dec 12, 2026 - Swim Meet</p>
+
+    <p class="note">Part Day Closures</p>
+    <p>Friday Sept 18, 2026 - 7:00pm to 9:00pm</p>
+    <p>Friday Oct 23, 2026 - 7:00pm to 9:00pm</p>
+    <p>Friday Nov 13, 2026 - 7:00pm to 9:00pm</p>
+    <p>Friday Dec 4, 2026 - 7:00pm to 9:00pm</p>
+
+    <p>Discount swim passes; All Access Memberships or Drop-in Lap Swim can be purchased at the pool with cash, credit card, or check.</p>
+    <p class="note">NOTICE - prices will be increased on July 1, 2026.</p>
+    <p>Senior age is 60 and up.</p>
+
+    <table>
+      <thead><tr><th>Drop in Pass</th><th class="price">Price</th></tr></thead>
+      <tbody>
+        <tr><td>Adult Drop-in or Family Recreation Swim (1 Entry)</td><td class="price">$6.00</td></tr>
+        <tr><td>Senior Drop-in or Family Recreation Swim (1 Entry)</td><td class="price">$5.00</td></tr>
+        <tr><td>Youth Family Recreation Swim (1 Entry)</td><td class="price">$5.00</td></tr>
+        <tr><td>Water Aerobics (1 Entry)</td><td class="price">$5.00</td></tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead><tr><th>Discount Swim Passes</th><th class="price">Price</th></tr></thead>
+      <tbody>
+        <tr><td>Adult 10 Pass</td><td class="price">$62.00</td></tr>
+        <tr><td>Adult 20 pass</td><td class="price">$113.00</td></tr>
+        <tr><td>Senior or Youth 10 pass</td><td class="price">$50.00</td></tr>
+        <tr><td>Senior or Youth 20 pass</td><td class="price">$96.00</td></tr>
+      </tbody>
+    </table>
+    <p>Adult/Senior 10/20 passes are good for those number of entries and never expire. These swim passes are good for adult lap swim, water aerobics, and family recreation swim.</p>
+
+    <table>
+      <thead><tr><th>All Access Membership Pass (AAM)</th><th class="price">Adult Price</th><th class="price">Senior Price</th></tr></thead>
+      <tbody>
+        <tr><td>Monthly (30 days)</td><td class="price">$75.00</td><td class="price">$65.00</td></tr>
+        <tr><td>Quarterly (90 days)</td><td class="price">$215.00</td><td class="price">$185.00</td></tr>
+        <tr><td>Yearly (365 days)</td><td class="price">$795.00</td><td class="price">$715.00</td></tr>
+      </tbody>
+    </table>
+    <p>Adult and senior All Access Membership pass allows the member to swim at any time that the pool is open for adult lap swim, water aerobics, and recreation swim.</p>
+    <p>All-Access Membership is a like a &ldquo;gym membership,&rdquo; where you come and go as you, please when the pool is open.</p>
+
+    <h2>Oceana High School Schedule</h2>
+    <p>Every school year, January &ndash; March, Oceana school in water PE unit will be taking place so Monday - Friday Lap swim will be Closed 8:30am to 1pm. This calendar will be updated as we approach the time.</p>
+
+    <h2>Lap Swimming Etiquette</h2>
+    <p>For the enjoyment and safety of all our lap swimmers, please be sure to follow these courtesy rules:</p>
+    <ul>
+      <li>NO diving into the water! Enter feet first.</li>
+      <li>Swimmers need/will be required to share lanes when pool becomes crowded and utilize the circle method of swimming when there are three or more swimmers per lane. If there are two swimmers per lane, you should mutually agree to swim in a straight line using half a lane each.</li>
+      <li>Swim full laps.</li>
+      <li>Do not hang on the lane lines</li>
+      <li>If you need to stop at the walls, move to the side so others may continue swimming.</li>
+      <li>Be aware of other swimmers near you - on either side, or in front of you. It is your responsibility not to swim into the feet of the person in front of you.</li>
+      <li>Staff should not have to be referees. We ask your cooperation so that a courteous and friendly attitude will continue to prevail during our Swim Programs.</li>
+      <li>If the code of conduct/rules are broken, lifeguards may ask you to leave at any time.</li>
+    </ul>
+
+    <h3>Family Recreation Swim Rules</h3>
+    <ul>
+      <li>3 lanes will be available for lap swimming during Recreation Swim.</li>
+      <li>Children must be 6 years of age, 48&quot; tall and be water safe to swim unattended, or they must be accompanied in the water one-on-one with an adult.</li>
+      <li>No personal flotation devices allowed expect Coast Guard approved life jackets.</li>
+      <li>All person wearing life jackets must stay in the shallow end of the pool.</li>
+      <li>If the code of conduct/ rules are broken, lifeguards may ask you to leave at any time.</li>
+    </ul>
+
+    <div class="callout">
+      <h3 style="margin-top:0">A Word from Mitchell</h3>
+      <p>Safety is important to help keep you and our community safe! I want to thank you for your cooperation, and I hope you and your family enjoy our most amazing swimming pool. We look forward to seeing you all at the Jean E. Brink Pool and please feel free and reach out to me at: Aquatics Coordinator Mitchell Klassen at, 650-738-7461 or <a href="mailto:mklassen@pacifica.gov">mklassen@pacifica.gov</a> if you have any questions, comments or you just want to say hi. Take care and be safe. &#127946;&#8205;&#9794;&#65039;&#127946;&#128512;</p>
+    </div>
+
+    <h3>Presenting the Jean E. Brink Pool</h3>
+    <figure class="figure-right">
+      <img src="https://www.cityofpacifica.org/home/showpublishedimage/396/637821574108570000" alt="people swimming">
+    </figure>
+    <p>The Brink Swimming Pool is a 10 lane, 25-yard indoor pool that is open year-round. The City of Pacifica, Parks Beaches &amp; Recreation Department is the primary user of the pool and offers a wide array of aquatic programs for participants. The Brink pool boasts a 1 meter and a 3-meter diving board. Depth ranges from 3 feet to 12 feet. Pool temperature is maintained at 82 degrees. There are dressing rooms that include lockers; however, participants must provide their own locks and towels.</p>
+    <div class="clear"></div>
+
+    <h3>Who is Jean?</h3>
+    <figure class="figure-right">
+      <img src="https://www.cityofpacifica.org/home/showpublishedimage/398/637821574110470000" alt="Jean_Brink">
+    </figure>
+    <p>Jean served on the Jefferson Union High School District Board of Trustees for twenty years (1988-2008). Jean is an avid swimmer and has been swimming here since the pool opened in 1978. Jean has been the unofficial &quot;eye on the pool&quot;, alerting the district of user concerns, graffiti, or maintenance that needed attention. Over several years, she and other volunteers helped the Pacifica Sea Lions Swim Team with our beautiful tile mosaic on the far wall inside the pool building. As a resident of Pacifica, Jean has served her community beyond the realm of the Board of Trustees. She has volunteered for the City of Pacifica, Parks Beaches and Recreation Department, a committee person and volunteer for Pacifica&rsquo;s annual Fog Fest, a member of the Library Task Force and a volunteer at Sunset Ridge Elementary School. Her service has been recognized by the City of Pacifica as the Parks, Beaches and Recreation Department Volunteer of the Month and by the California Parks and Recreation Society&rsquo;s District IV Volunteer Award. If there is an opportunity to help, Jean can be counted upon to volunteer.</p>
+    <div class="clear"></div>
+
+    <h3>A Little History</h3>
+    <p>In November of 1974, the residents of Pacifica passed Proposition C and committed funds to help Jefferson Union High School District with the construction of an indoor pool on the Oceana High School Campus. Jefferson provided 65% of the funding and the residents of the city 35%. The pool opened for business after 4 years of construction, on June 19, 1978.</p>
+  </main>
+
+</div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-nav">
+      <a href="#">HOME</a>
+      <a href="#">I WANT TO...</a>
+      <a href="#">DEPARTMENTS</a>
+      <a href="#">GOVERNMENT</a>
+      <a href="#">BUSINESS</a>
+      <a href="#">ABOUT US</a>
+      <a href="#">SITEMAP</a>
+    </div>
+    <div class="footer-bottom">
+      <div>
+        <div><strong>City of Pacifica</strong> &nbsp;|&nbsp; 170 Santa Maria Avenue, Pacifica, CA 94044 &nbsp;|&nbsp; (650) 738-7300</div>
+        <div class="social"><span></span><span></span><span></span></div>
+      </div>
+      <a class="btn-subscribe" href="#">SUBSCRIBE</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
