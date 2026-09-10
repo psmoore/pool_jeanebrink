@@ -9,6 +9,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
 <title>Aquatics | City of Pacifica</title>
 <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
@@ -19,6 +20,18 @@
     --ink:#555;
     --rule:#e0e0e0;
   }
+  /* Unofficial-preview ribbon. The disclaimer used to live in an HTML comment, which
+     nobody opening the page can see; on a replica of a real city's page it has to be
+     visible. Dark, so it reads as something wrapped AROUND the page rather than part of
+     the city's own chrome. */
+  .preview-note{
+    background:#2b2b2b;color:#fff;font-size:14px;line-height:1.5;
+    padding:9px 18px;text-align:center;
+    font-family:Roboto,Helvetica,Arial,sans-serif;
+  }
+  .preview-note b{color:#7fc4ec;font-weight:700}
+  .preview-note a{color:#fff}
+
   *{box-sizing:border-box}
   body{margin:0;font-family:Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.55;color:var(--ink);background:#fff}
   a{color:var(--blue-light)}
@@ -119,6 +132,12 @@
 </style>
 </head>
 <body>
+
+<div class="preview-note">
+  <b>Unofficial preview.</b> Not a City of Pacifica page &mdash; a mock-up of
+  <a href="https://www.cityofpacifica.org/departments/parks-beaches-recreation/aquatics">the city&rsquo;s Aquatics page</a>
+  showing the weekly schedule image replaced by a live calendar.
+</div>
 
 <div class="utility">
   <div class="seal">City of<br>Pacifica</div>

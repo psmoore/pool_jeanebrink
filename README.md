@@ -3,7 +3,9 @@
 A replica of the City of Pacifica Aquatics page with the static weekly schedule image
 replaced by the live [Pool Relay](https://www.poolrelay.com) calendar for the Jean E. Brink Pool.
 
-**This is not an official City of Pacifica website.** It is an unofficial demonstration copy.
+**This is not an official City of Pacifica website.** It is an unofficial demonstration copy,
+and the page says so in a ribbon across the top — a disclaimer only in the source is one
+nobody opening the page can see.
 The page text and photos come from the city's Aquatics page:
 <https://www.cityofpacifica.org/departments/parks-beaches-recreation/aquatics>
 
